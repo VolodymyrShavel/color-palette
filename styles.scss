@@ -44,4 +44,61 @@ body {
          cursor: pointer;
       }
    }
+
+   p[data-type='copy-div'] {
+      display: none;
+      position: absolute;
+      top: 16.4rem;
+      transition: opacity 500ms, transform 500ms;
+   }
+   p.copied {
+      display: flex;
+      // position: absolute;
+      // transform: translateY(-15rem);
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 6px;
+      animation: push-up 1s ease-out;
+   }
+
+   div.generate {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      top: 85%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      // background: yellow;
+
+      button[data-type='generate'] {
+         border-radius: 10px;
+         transition: background 0.3s;
+         font-size: 1rem;
+         font-weight: bold;
+         padding: 10px;
+         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+         margin-bottom: 0.5rem;
+         background: rgba(0, 0, 0, 0.2);
+
+         &:hover {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+         }
+      }
+   }
+}
+
+@keyframes push-up {
+   0% {
+      transform: translateY(0);
+   }
+   50% {
+      transform: translateY(2.5rem);
+   }
+   100% {
+      transform: translateY(1rem);
+   }
 }

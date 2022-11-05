@@ -1,8 +1,13 @@
 const cols = document.querySelectorAll('.col');
+const generateDiv = document.querySelector('.generate');
+const generateText = generateDiv.querySelector('button');
 
 document.addEventListener('keydown', (e) => {
    e.preventDefault();
-   if (e.code.toLocaleLowerCase() === 'space') {
+   if (
+      e.code.toLocaleLowerCase() === 'space' ||
+      e.code.toLocaleLowerCase() === 'f5'
+   ) {
       setRandomColors();
    }
 });
@@ -17,7 +22,15 @@ document.addEventListener('click', (e) => {
       node.classList.toggle('fa-lock-open');
       node.classList.toggle('fa-lock');
    } else if (type === 'copy') {
+      const node = e.target.nextElementSibling;
+      node.classList.add('copied');
+      setTimeout(function () {
+         node.classList.remove('copied');
+      }, 800);
+
       copyToClickboard(e.target.textContent);
+   } else if (type === 'generate') {
+      setRandomColors();
    }
 });
 
@@ -43,6 +56,7 @@ function setRandomColors(isInitial) {
       const isLocked = col.querySelector('i').classList.contains('fa-lock');
       const text = col.querySelector('h2');
       const button = col.querySelector('button');
+      const copie = col.firstChild.nextElementSibling.nextElementSibling;
 
       if (isLocked) {
          colors.push(text.textContent);
@@ -61,9 +75,13 @@ function setRandomColors(isInitial) {
 
       text.textContent = color;
       col.style.background = color;
+
       setTextColor(text, color);
       setTextColor(button, color);
+      setTextColor(copie, color);
    });
+   setTextColor(generateDiv, colors[2]);
+   setTextColor(generateText, colors[2]);
 
    updateColorsHash(colors);
 }
